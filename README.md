@@ -1,11 +1,11 @@
 ### NOTES APP
-This is a notes app built with React, where users can save different groups of notes, and all data is persistent.
+This is a notes app built with React that allows users to save different groups of notes, with all data being persistent.
 
 ### Features List:
 
-1. User should be able to create group for notes, a popup open up to create a new group and if the user clicks outside the popup then you need to close the popup
-2. User should be able to add notes in a particular group
-3. User should be able save the note by pressing Enter key or clicking on the Enter icon in the text input
-4. You need to save the notes in localstorage, every notes and group should persist on page reload
-5. As soon as the user changes the group, you need to fetch all the notes related to that particular group
-6. You also need to save meta data like date and time when the notes was saved and last updated.
+1. The user can create a group for notes. A popup opens to create a new group, and if the user clicks outside the popup, it will close.
+2. The user can add notes to a specific group.
+3. The user can save a note by pressing the Enter key or clicking the Enter icon in the text input.
+4. Notes are stored in local storage, and all notes and groups are persistent on page reload.
+5. When the user switches groups, all notes related to the selected group are fetched.
+6. This app also saves metadata, such as the date and time when notes were saved and last updated.

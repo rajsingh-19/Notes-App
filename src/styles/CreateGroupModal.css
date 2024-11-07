@@ -1,0 +1,19 @@
+.modalContainer {
+    background-color: #CCCCCC;
+    border: 2px solid #CCCCCC;
+    width: 660px;
+}
+
+
+
+
+.create-btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-items: end;
+}
+.createBtn {
+    background-color: #001F8B;
+    border-radius: 11px;
+    padding: 5px 22px;
+}

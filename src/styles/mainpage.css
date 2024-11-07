@@ -1,0 +1,67 @@
+.mainpage-container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.notes-making-section {
+    background-color: #FFFFFF;
+    grid-column: span 2;
+}
+.notes-making-section p {
+    padding-top: 50px;
+}
+.plusIcon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    bottom: 40px;
+    left: 21.5%;
+}
+.plusIcon {
+    width: 60px;
+    height: 60px;
+}
+/*          notes section            */
+.notes-section {
+    background-color: #DAE5F5;
+    grid-column: span 5;
+}
+.bgImgContainer {
+    padding-top: 160px;
+    padding-bottom: 10px;
+}
+.bgImg {
+    width: 600px;
+    height: 310px;
+}
+.notes-description {
+    margin-top: 10px;
+}
+.notes-description p {
+    color: #292929;
+}
+.lockIcon-container {
+    position: fixed;
+    bottom: 20px;
+}
+.lockIcon {
+    width: 25px;
+    height: 25px;
+}
+
+/*          modal view container        */
+.modalViewContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
