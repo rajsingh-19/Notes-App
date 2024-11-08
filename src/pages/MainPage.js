@@ -7,9 +7,23 @@ import CreateGroupModal from '../components/CreateGroupModal';
 
 const MainPage = () => {
     const [modalStatus, setModalStatus] = useState(false);
+    const [groups, setGroups] = useState([]);
 
+    //      function for opening the modal
     const handleCreateGroup = () => {
         setModalStatus(true);
+    }
+    //      function for closing the modal
+    const handleCloseModal = (e) => {
+        if(e.target.classList.contains('modalViewContainer')) {
+            setModalStatus(false);
+        }
+    }
+
+    //      function for adding a new group
+    const addNewGroup = (group) => {
+        setGroups([...groups, group]);
+        setModalStatus(false); // Close the modal after adding the group
     }
 
   return (
@@ -17,6 +31,14 @@ const MainPage = () => {
       {/*       Notes Making Section            */}
         <div className='notes-making-section position-relative'>
             <p className='text-center text-32 letter-spacing-2 font-wt-500'>Pocket Notes</p>
+            <ul>
+                {groups.map((group, index) => (
+                    <li key={index} className='groupNameList flex dir-row align-center'>
+                        <div className='nameCircle text-20 font-wt-500' style={{ backgroundColor: group.color }}>{group.name.slice(0, 2).toUpperCase()}</div>
+                        <div className='groupName text-20 font-wt-500'>{group.name}</div>
+                    </li>
+                ))}
+            </ul>
             <button className='plusIcon-container flex dir-row justify-center align-center position-fixed cursor-pointer' onClick={handleCreateGroup}>
                 <img src={plusIcon} alt='plus-icon' className='plusIcon' />
             </button>
@@ -41,8 +63,8 @@ const MainPage = () => {
         {/*             Modal Container          */}
         {
             modalStatus && (
-                <div className='modalViewContainer'>
-                    <CreateGroupModal />
+                <div className='modalViewContainer' onClick={handleCloseModal}>
+                    <CreateGroupModal  onCreateGroup={addNewGroup}/>
                 </div>
             ) 
         }

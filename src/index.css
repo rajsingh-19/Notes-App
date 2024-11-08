@@ -144,3 +144,15 @@ body {
 .text-black {
   color: #000000;
 }
+
+.margin-tb-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.margin-b-10 {
+  margin-bottom: 10px;
+}
+.m-r-30 {
+  margin-right: 30px;
+}
