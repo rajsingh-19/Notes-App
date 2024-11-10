@@ -22,20 +22,19 @@ const MainPage = () => {
             setModalStatus(false);
         }
     }
-
     //      function for adding a new group
     const addNewGroup = (group) => {
         setGroups([...groups, group]);
         setModalStatus(false); // Close the modal after adding the group
     }
-
+    //      function for choosing any group and its corresponding notes
     const handleNotesGroup = (index) => {
         setSelectedGroupIndex(index);
         setShowNotes(true);
     }
-
     // Function to get initials for the nameCircle
     const getInitials = (name) => {
+        if (!name) return ""; // Handle undefined or null name
         const words = name.trim().split(" ");
         if (words.length === 1) {
             return words[0].charAt(0).toUpperCase();
@@ -63,7 +62,7 @@ const MainPage = () => {
         {/*     Notes Section                   */}
         <div className='notes-section'>
         {
-            showNotes ? <Notes /> : 
+            showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} /> : 
             <div className='flex dir-col'>
                 <div className='bgImgContainer flex dir-row justify-center'>
                     <img src={mainpageImg} alt="main page background-image" className='bgImg' />

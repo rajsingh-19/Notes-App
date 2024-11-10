@@ -1,34 +1,81 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../styles/Notes.css";
 import rightArrow from "../assets/rightArrow.svg";
 
-const Notes = () => {
+const Notes = ({ group, getInitials}) => {
+    const [notes, setNotes] = useState([]);
+    const [noteText, setNoteText] = useState('');
+    const [arrowColor, setArrowColor] = useState(false);
+
+    //          function for note writing
+    const handleNoteText = (e) => {
+        const text = e.target.value;
+        setNoteText(text);
+        setArrowColor(text.length > 0);
+    };
+
+    //          function for note writing into the notes card and formatting of date and time
+    const handleButtonClick = () => {
+        if (noteText.trim()) {
+            //          format for date
+            const date = new Date();
+            const day = date.getDate();
+            const month = date.toLocaleString('en-US', { month: 'short' });
+            const year = date.getFullYear();
+            const formattedDate = `${day} ${month} ${year}`;
+            //          format for time
+            const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+            const formattedTime = new Date().toLocaleTimeString('en-US', timeOptions); 
+            
+            setNotes([...notes, { text: noteText, formattedDate, formattedTime }]);
+            setNoteText('');
+            setArrowColor(false);
+        }
+    };
+
+    //          function for enter key and clearing the text area
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter" && arrowColor) {
+            e.preventDefault();
+            handleButtonClick();
+        }
+    };
+
   return (
     <div className='notes-container flex dir-col'>
-        <div className='notesNameContainer flex dir-row'>
-            <div className='circleGroupContainer font-wt-500'>MN</div>
-            <div className='notesName font-wt-500'>My Notes</div>
-        </div>
+        {/*                 Notes name heading              */}
+        {
+            group && (
+                <div className='notesNameContainer flex dir-row align-center'>
+                    <div className='circleGroupContainer font-wt-500  text-20 flex dir-row justify-center align-center m-lr-10' style={{ backgroundColor: group.color }}>{getInitials(group?.name)}</div>
+                    <div className='notesName font-wt-500 text-20'>{group?.name}</div>
+                </div>
+            )
+        }
+        {/*                 Notes card                       */}
         <div>
-            <ul>
-                <li className='notesCard font-wt-400'>
-                    <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quas, esse laboriosam sed, eum quisquam accusamus odio eaque, aliquid illum ex cumque repudiandae laudantium similique.
-                    </div>
-                    <div>
-                        <span>Date</span>
-                        <span>Time</span>
-                    </div>
-                </li>
+            <ul className='notesCardContainer flex dir-col align-center list-style-none'>
+                {notes.map((note, index) => (
+                    <li key={index} className='notesCard position-relative m-b-30'>
+                        <div className='notesContent font-wt-400'>{note.text}</div>
+                        <div className='dateTimeContainer position-absolute letter-spacing-2 flex dir-row justify-center align-center'>
+                            <span className='text-14'>{note.formattedDate}</span>
+                            <span className="circleSeparator m-lr-10"></span> 
+                            <span className='text-14'>{note.formattedTime}</span>
+                        </div>                        
+                    </li>
+                ))}
             </ul>
         </div>
-        <div className='writingNotesContainer position-relative'>
-            <textarea type="text" placeholder='Enter your text here...........' className='writingInput outline-none' />
-            <button className='rightArrowBtn'>
+        {/*                 Writing textarea container        */}
+        <div className='writingNotesContainer'>
+            <textarea type="text" value={noteText} placeholder='Enter your text here...........' className='writingInput text-18 font-wt-400 outline-none' onChange={handleNoteText} onKeyDown={handleKeyPress} />
+            <button className={`cursor-pointer rightArrowBtn ${arrowColor ? 'active' : ''}`} onClick={handleButtonClick}>
                 <img src={rightArrow} alt="right arrow" className='rightArrowImg' />
             </button>
         </div>
     </div>
   )
 }
+
 export default Notes;
