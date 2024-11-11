@@ -9,3 +9,8 @@ This is a notes app built with React that allows users to save different groups 
 4. Notes are stored in local storage, and all notes and groups are persistent on page reload.
 5. When the user switches groups, all notes related to the selected group are fetched.
 6. This app also saves metadata, such as the date and time when notes were saved and last updated.
+
+![Alt text](https://github.com/rajsingh-19/Notes-App/blob/6ec21a0bbe77b03d3ef2d3e2c191391e2e7ad434/Screenshot%20(85).png)
+
+
+   
