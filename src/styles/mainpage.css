@@ -6,7 +6,7 @@
 .notes-name-section {
     background-color: #FFFFFF;
     width: 30vw;
-    height: 100%;
+    height: 100vh;
 }
 .notes-name-section p {
     padding-top: 50px;
@@ -48,7 +48,7 @@
 .notes-section {
     background-color: #DAE5F5;
     width: 70vw;
-    height: 100%;
+    height: 100vh;
 }
 .bgImgContainer {
     padding-top: 160px;
@@ -88,28 +88,23 @@
     height: 100vh;
 }
 
-/*              responsiveness               */
-/*      mobile screens           */
-@media (min-width: 315px) and (max-width: 426px) {
+/*              responsiveness       */
+@media (max-width: 426px) and (min-width: 315px) {
     .notes-name-section {
         width: 100vw;
     }
-    .nameCircle {
-        width: 40px;
-        height: 40px;
-    }
     .plusIcon-container {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        bottom: 20px;
-        left: 83%;
-    }
-    .plusIcon {
-        width: 45px;
-        height: 45px;
+        bottom: 40px;
+        left: 75%;
     }
     .notes-section {
-        display: none;
+      display: none;
     }
+}
+
+@media (max-width: 768px) and (min-width: 425px) {
+  .bgImg {
+    width: 90%;
+    height: 310px;
+  }
 }
