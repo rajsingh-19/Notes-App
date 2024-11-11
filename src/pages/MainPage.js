@@ -31,9 +31,6 @@ const MainPage = () => {
         if (Object.keys(groupNotes).length > 0) {
             localStorage.setItem("groupNotes", JSON.stringify(groupNotes));
         }
-        // //      save the updated groups and groupNotes in localStorage
-        // localStorage.setItem("groups", JSON.stringify(groups));
-        // localStorage.setItem("groupNotes", JSON.stringify(groupNotes));
     }, [groups, groupNotes]);
 
     //      function for opening the modal
@@ -70,7 +67,7 @@ const MainPage = () => {
         setShowNotes(true);
 
           // Hide sidebar if screen width is less than or equal to 425px (mobile)
-        if (window.innerWidth <= 425) {
+        if (window.innerWidth <= 426) {
             setIsSidebarVisible(false);
         }
     }
@@ -114,7 +111,7 @@ const MainPage = () => {
             )
         }
         {/*     Notes Section                   */}
-        <div className='notes-section' style={{ width: isSidebarVisible ? '70vw' : '100vw', display: showNotes ? 'block' : 'none'  }}>
+        <div className='notes-section' style={{ width: isSidebarVisible ? '70vw' : '100vw'}}>
         {
             showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} notes={groupNotes[selectedGroupIndex] || []} addNote={(newNote) => updateGroupNotes(selectedGroupIndex, newNote)} /> : 
             <div className='flex dir-col'>
