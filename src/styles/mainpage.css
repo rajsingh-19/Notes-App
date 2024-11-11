@@ -92,6 +92,7 @@
 @media (max-width: 426px) and (min-width: 315px) {
     .notes-name-section {
         width: 100vw;
+        display: block;
     }
     .plusIcon-container {
         bottom: 40px;
@@ -99,6 +100,9 @@
     }
     .notes-section {
       display: none;
+    }
+    .notes-section.visible {
+        display: block; /* Show notes section when group is selected */
     }
 }
 

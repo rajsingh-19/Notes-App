@@ -94,3 +94,9 @@
 .rightArrowBtn.active .rightArrowImg {
     filter: brightness(0) saturate(100%) invert(14%) sepia(100%) saturate(800%) hue-rotate(200deg) brightness(60%) contrast(90%); /* Dark blue (#001F8B) */
 }
+/*          responsiveness       */
+@media (max-width: 426px) and (min-width: 315px) {
+    .backArrowContainer {
+        display: block;
+    }
+}

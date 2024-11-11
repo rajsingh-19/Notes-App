@@ -3,7 +3,7 @@ import "../styles/Notes.css";
 import backArrow from "../assets/backArrow.svg";
 import rightArrow from "../assets/rightArrow.svg";
 
-const Notes = ({ group, getInitials, notes, addNote}) => {
+const Notes = ({ group, getInitials, notes, addNote, handleBackBtn}) => {
     const [noteText, setNoteText] = useState('');
     const [arrowColor, setArrowColor] = useState(false);
 
@@ -40,11 +40,6 @@ const Notes = ({ group, getInitials, notes, addNote}) => {
             e.preventDefault();
             handleButtonClick();
         }
-    };
-
-    //          function for going back to the group name list container in mobile device screens
-    const handleBackBtn = () => {
-
     };
 
   return (

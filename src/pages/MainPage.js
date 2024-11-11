@@ -12,6 +12,7 @@ const MainPage = () => {
     const [showNotes, setShowNotes] = useState(false);
     const [selectedGroupIndex, setSelectedGroupIndex] = useState(null);
     const [groupNotes, setGroupNotes] = useState({});
+    const [showNotesContainer, setShowNotesContainer] = useState(true);
 
     //      load data from local storage on mount
     useEffect(() => {
@@ -83,10 +84,17 @@ const MainPage = () => {
         return words.slice(0, 2).map(word => word.charAt(0).toUpperCase()).join("");
     };
 
+    // Handle back button click for small screens
+    const handleBackBtn = () => {
+        setShowNotesContainer(true); // Show the group list again
+        setShowNotes(false); // Hide the notes container
+    };
+
   return (
     <div className='mainpage-container flex dir-row'>
       {/*       Notes Making Section            */}
         {
+             showNotesContainer && (
             <div className='notes-name-section position-relative'>
                 <p className='text-center text-32 letter-spacing-2 font-wt-500 m-b-30'>Pocket Notes</p>
                 <ul className='groupNameListContainer'>
@@ -100,12 +108,13 @@ const MainPage = () => {
                 <button className='plusIcon-container flex dir-row justify-center align-center position-fixed cursor-pointer' onClick={handleCreateGroup}>
                     <img src={plusIcon} alt='plus-icon' className='plusIcon' />
                 </button>
-            </div>
+            </div> 
+             )
         }
         {/*     Notes Section                   */}
-        <div className='notes-section'>
+        <div className={`notes-section ${showNotes ? 'visible' : ''}`}>
         {
-            showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} notes={groupNotes[selectedGroupIndex] || []} addNote={(newNote) => updateGroupNotes(selectedGroupIndex, newNote)} /> : 
+            showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} notes={groupNotes[selectedGroupIndex] || []} addNote={(newNote) => updateGroupNotes(selectedGroupIndex, newNote)} handleBackBtn={handleBackBtn} /> : 
             <div className='flex dir-col'>
                 <div className='bgImgContainer flex dir-row justify-center'>
                     <img src={mainpageImg} alt="main page background-image" className='bgImg' />
