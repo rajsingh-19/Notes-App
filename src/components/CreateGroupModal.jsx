@@ -9,11 +9,20 @@ const CreateGroupModal = ({ onCreateGroup }) => {
 
   //    function for creating a new group
   const handleCreateClick = () => {
-    // If groupName is empty, return early and don't create the group
+    //    if groupName is empty, return early and don't create the group
     if (!groupName) return;
     
     if (groupName && groupNameColor) {
-      onCreateGroup({ name: groupName, color: groupNameColor });
+      //    create new group object
+      const newGroup = { name: groupName, color: groupNameColor };
+
+      //    update groups in localStorage
+      const storedGroups = JSON.parse(localStorage.getItem("groups")) || [];
+      storedGroups.push(newGroup);
+      localStorage.setItem("groups", JSON.stringify(storedGroups));
+
+      //    Call onCreateGroup to update the state in MainPage
+      onCreateGroup(newGroup);
     }
   };
 

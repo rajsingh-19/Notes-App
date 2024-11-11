@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../styles/mainpage.css";
 import mainpageImg from "../assets/main-page-img.png";
 import plusIcon from "../assets/plusIcon.svg";
@@ -11,28 +11,72 @@ const MainPage = () => {
     const [groups, setGroups] = useState([]);
     const [showNotes, setShowNotes] = useState(false);
     const [selectedGroupIndex, setSelectedGroupIndex] = useState(null);
+    const [groupNotes, setGroupNotes] = useState({});
+
+    //      load data from local storage on mount
+    useEffect(() => {
+        const storedGroups = JSON.parse(localStorage.getItem("groups")) || [];
+        const storedGroupNotes = JSON.parse(localStorage.getItem("groupNotes")) || {};
+        setGroups(storedGroups);
+        setGroupNotes(storedGroupNotes);
+    }, []);
+
+    //      update local storage whenever groups or groupNotes change
+    useEffect(() => {
+        // Save updated groups and groupNotes in localStorage
+        if (groups.length > 0) {
+            localStorage.setItem("groups", JSON.stringify(groups));
+        }
+        if (Object.keys(groupNotes).length > 0) {
+            localStorage.setItem("groupNotes", JSON.stringify(groupNotes));
+        }
+        // //      save the updated groups and groupNotes in localStorage
+        // localStorage.setItem("groups", JSON.stringify(groups));
+        // localStorage.setItem("groupNotes", JSON.stringify(groupNotes));
+    }, [groups, groupNotes]);
 
     //      function for opening the modal
     const handleCreateGroup = () => {
         setModalStatus(true);
     }
+
     //      function for closing the modal
     const handleCloseModal = (e) => {
         if(e.target.classList.contains('modalViewContainer')) {
             setModalStatus(false);
         }
     }
+
     //      function for adding a new group
     const addNewGroup = (group) => {
-        setGroups([...groups, group]);
-        setModalStatus(false); // Close the modal after adding the group
+        //      update groups and initialize an empty note list for the new group in groupNotes4
+        const newGroups = [...groups, group];
+        setGroups(newGroups);
+        // Add an empty notes array for the new group
+        const newGroupNotes = ({ ...groupNotes, [newGroups.length - 1]: [] });
+        setGroupNotes(newGroupNotes);       // update groupNotes state
+        setModalStatus(false);              // close the modal after adding the group
+
+        // Update localStorage with the new groups and groupNotes
+        localStorage.setItem("groups", JSON.stringify(newGroups));
+        localStorage.setItem("groupNotes", JSON.stringify(newGroupNotes));
     }
+
     //      function for choosing any group and its corresponding notes
     const handleNotesGroup = (index) => {
+        //      set selectedGroupIndex and showNotes to display the correct notes
         setSelectedGroupIndex(index);
         setShowNotes(true);
     }
-    // Function to get initials for the nameCircle
+
+    //      function to update notes of a specific group
+    const updateGroupNotes = (index, newNote) => {
+        //      update the notes for the selected group in groupNotes state
+        const updatedGroupNotes = {...groupNotes,[index]: [...(groupNotes[index] || []), newNote]};
+        setGroupNotes(updatedGroupNotes); // Single state update
+    };
+
+    //      function to get initials for the nameCircle
     const getInitials = (name) => {
         if (!name) return ""; // Handle undefined or null name
         const words = name.trim().split(" ");
@@ -62,7 +106,7 @@ const MainPage = () => {
         {/*     Notes Section                   */}
         <div className='notes-section'>
         {
-            showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} /> : 
+            showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} notes={groupNotes[selectedGroupIndex] || []} addNote={(newNote) => updateGroupNotes(selectedGroupIndex, newNote)} /> : 
             <div className='flex dir-col'>
                 <div className='bgImgContainer flex dir-row justify-center'>
                     <img src={mainpageImg} alt="main page background-image" className='bgImg' />

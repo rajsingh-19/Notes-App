@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import "../styles/Notes.css";
 import rightArrow from "../assets/rightArrow.svg";
 
-const Notes = ({ group, getInitials}) => {
-    const [notes, setNotes] = useState([]);
+const Notes = ({ group, getInitials, notes, addNote}) => {
     const [noteText, setNoteText] = useState('');
     const [arrowColor, setArrowColor] = useState(false);
 
@@ -26,8 +25,9 @@ const Notes = ({ group, getInitials}) => {
             //          format for time
             const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
             const formattedTime = new Date().toLocaleTimeString('en-US', timeOptions); 
-            
-            setNotes([...notes, { text: noteText, formattedDate, formattedTime }]);
+
+            //      adding the note using addNote prop function
+            addNote({ text: noteText, formattedDate, formattedTime });
             setNoteText('');
             setArrowColor(false);
         }
