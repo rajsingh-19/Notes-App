@@ -3,15 +3,10 @@
   margin: 0;
   box-sizing: border-box;
 }
-:root {
-  --bg-black: #0a0a0a;
-  --bg-white: ##d4d4d4;
-}
-
 body {
   font-family: "Roboto", sans-serif;
 }
-
+/*        box design     */
 .flex {
   display: flex;
 }
@@ -36,7 +31,6 @@ body {
 .align-center {
   align-items: center;
 }
-
 /*            font weight        */
 .font-wt-200 {
   font-weight: 200;
@@ -76,7 +70,6 @@ body {
 .top-0 {
   top: 0;
 }
-
 /*              text size        */
 .text-14 {
   font-size: 14px;
@@ -105,7 +98,6 @@ body {
 .text-40 {
   font-size: 40px;
 }
-
 /*            text         */
 .text-center {
   text-align: center;
@@ -113,7 +105,6 @@ body {
 .text-decoration-none {
   text-decoration: none;
 }
-
 .border-none {
   border: none;
 }
@@ -129,7 +120,7 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
-
+/*        letter spacing     */
 .letter-spacing-1 {
   letter-spacing: 1px;
 }
@@ -139,21 +130,18 @@ body {
 .letter-spacing-3 {
   letter-spacing: 3px;
 }
-
-
+/*        text color     */
 .text-white {
   color: #FFFFFF;
 }
 .text-black {
   color: #000000;
 }
-
+/*        margin       */
 .margin-tb-10 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
-
 .m-b-5 {
   margin-bottom: 5px;
 }

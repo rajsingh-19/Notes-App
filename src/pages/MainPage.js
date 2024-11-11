@@ -12,6 +12,7 @@ const MainPage = () => {
     const [showNotes, setShowNotes] = useState(false);
     const [selectedGroupIndex, setSelectedGroupIndex] = useState(null);
     const [groupNotes, setGroupNotes] = useState({});
+    const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
     //      load data from local storage on mount
     useEffect(() => {
@@ -67,6 +68,11 @@ const MainPage = () => {
         //      set selectedGroupIndex and showNotes to display the correct notes
         setSelectedGroupIndex(index);
         setShowNotes(true);
+
+          // Hide sidebar if screen width is less than or equal to 425px (mobile)
+        if (window.innerWidth <= 425) {
+            setIsSidebarVisible(false);
+        }
     }
 
     //      function to update notes of a specific group
@@ -89,22 +95,26 @@ const MainPage = () => {
   return (
     <div className='mainpage-container flex dir-row'>
       {/*       Notes Making Section            */}
-        <div className='notes-name-section position-relative'>
-            <p className='text-center text-32 letter-spacing-2 font-wt-500 m-b-30'>Pocket Notes</p>
-            <ul className='groupNameListContainer'>
-                {groups.map((group, index) => (
-                    <li key={index} className='groupNameList flex dir-row align-center cursor-pointer m-b-5' style={{backgroundColor: index === selectedGroupIndex ? '#2F2F2F2B' : 'transparent',}} onClick={() => handleNotesGroup(index)}>
-                        <div className='nameCircle text-20 font-wt-500 flex dir-row justify-center align-center m-lr-10' style={{ backgroundColor: group.color }}>{getInitials(group.name)}</div>
-                        <div className='groupName text-20 font-wt-500'>{group.name}</div>
-                    </li>
-                ))}
-            </ul>
-            <button className='plusIcon-container flex dir-row justify-center align-center position-fixed cursor-pointer' onClick={handleCreateGroup}>
-                <img src={plusIcon} alt='plus-icon' className='plusIcon' />
-            </button>
-        </div>
+        {
+            isSidebarVisible && (
+                <div className='notes-name-section position-relative'>
+                    <p className='text-center text-32 letter-spacing-2 font-wt-500 m-b-30'>Pocket Notes</p>
+                    <ul className='groupNameListContainer'>
+                        {groups.map((group, index) => (
+                            <li key={index} className='groupNameList flex dir-row align-center cursor-pointer m-b-5' style={{backgroundColor: index === selectedGroupIndex ? '#2F2F2F2B' : 'transparent',}} onClick={() => handleNotesGroup(index)}>
+                                <div className='nameCircle text-20 font-wt-500 flex dir-row justify-center align-center m-lr-10' style={{ backgroundColor: group.color }}>{getInitials(group.name)}</div>
+                                <div className='groupName text-20 font-wt-500'>{group.name}</div>
+                            </li>
+                        ))}
+                    </ul>
+                    <button className='plusIcon-container flex dir-row justify-center align-center position-fixed cursor-pointer' onClick={handleCreateGroup}>
+                        <img src={plusIcon} alt='plus-icon' className='plusIcon' />
+                    </button>
+                </div>
+            )
+        }
         {/*     Notes Section                   */}
-        <div className='notes-section'>
+        <div className='notes-section' style={{ width: isSidebarVisible ? '70vw' : '100vw', display: showNotes ? 'block' : 'none'  }}>
         {
             showNotes ? <Notes group={groups[selectedGroupIndex]} getInitials={getInitials} notes={groupNotes[selectedGroupIndex] || []} addNote={(newNote) => updateGroupNotes(selectedGroupIndex, newNote)} /> : 
             <div className='flex dir-col'>

@@ -87,3 +87,29 @@
     width: 100vw;
     height: 100vh;
 }
+
+/*              responsiveness               */
+/*      mobile screens           */
+@media (min-width: 315px) and (max-width: 426px) {
+    .notes-name-section {
+        width: 100vw;
+    }
+    .nameCircle {
+        width: 40px;
+        height: 40px;
+    }
+    .plusIcon-container {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        bottom: 20px;
+        left: 83%;
+    }
+    .plusIcon {
+        width: 45px;
+        height: 45px;
+    }
+    .notes-section {
+        display: none;
+    }
+}

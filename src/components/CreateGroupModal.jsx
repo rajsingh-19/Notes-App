@@ -29,10 +29,10 @@ const CreateGroupModal = ({ onCreateGroup }) => {
   return (
     <div className="modalContainer flex dir-col">
         <p className="text-24 font-wt-500 letter-spacing3 margin-tb-10">Create New group</p>
-        <div className=" flex dir-row align-center m-b-10">
+        <div className="flex dir-row align-center m-b-10">
           <p className="text-22 font-wt-500 m-r-30">Group Name</p>
           <div className="groupNameContainer">
-            <input type="text" className="groupNameInput flex dir-row justify-center align-center text-18 outline-none" placeholder="Enter group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+            <input type="text" className="groupNameInput flex dir-row align-center text-18 outline-none" placeholder="Enter group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
           </div>
         </div>
         <div className="flex dir-row align-center m-b-10">

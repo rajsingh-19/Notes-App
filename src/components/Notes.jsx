@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "../styles/Notes.css";
+import backArrow from "../assets/backArrow.svg";
 import rightArrow from "../assets/rightArrow.svg";
 
 const Notes = ({ group, getInitials, notes, addNote}) => {
@@ -41,12 +42,20 @@ const Notes = ({ group, getInitials, notes, addNote}) => {
         }
     };
 
+    //          function for going back to the group name list container in mobile device screens
+    const handleBackBtn = () => {
+
+    };
+
   return (
     <div className='notes-container flex dir-col'>
         {/*                 Notes name heading              */}
         {
             group && (
                 <div className='notesNameContainer flex dir-row align-center'>
+                    <button className='hide backArrowContainer flex dir-row justify-center align-center bg-transparent cursor-pointer border-none'onClick={handleBackBtn}>
+                        <img src={backArrow} alt="back arrow" className='backArrowImg' />
+                    </button>
                     <div className='circleGroupContainer font-wt-500  text-20 flex dir-row justify-center align-center m-lr-10' style={{ backgroundColor: group.color }}>{getInitials(group?.name)}</div>
                     <div className='notesName font-wt-500 text-20'>{group?.name}</div>
                 </div>
