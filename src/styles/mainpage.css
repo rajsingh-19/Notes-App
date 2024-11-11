@@ -87,7 +87,6 @@
     width: 100vw;
     height: 100vh;
 }
-
 /*              responsiveness       */
 @media (max-width: 426px) and (min-width: 315px) {
     .notes-name-section {
@@ -99,16 +98,32 @@
         left: 75%;
     }
     .notes-section {
-      display: none;
+        width: 100vw;
+        display: none;
     }
     .notes-section.visible {
         display: block; /* Show notes section when group is selected */
     }
 }
-
-@media (max-width: 768px) and (min-width: 425px) {
-  .bgImg {
-    width: 90%;
-    height: 310px;
-  }
+@media (max-width: 768px) and (min-width: 426px) {
+    .bgImg {
+        width: 90%;
+        height: 310px;
+    }
+    .notes-description p {
+        font-size: 14px;
+    }
+    .lockIcon-container p {
+        font-size: 12px;
+    }
+    .plusIcon-container {
+        width: 50px;
+        height: 50px;
+        bottom: 40px;
+        left: 20%;
+    }
+    .plusIcon {
+        width: 50px;
+        height: 50px;
+    }
 }

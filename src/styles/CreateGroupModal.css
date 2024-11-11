@@ -90,7 +90,6 @@
         padding: 8px 80px;
     }
 }
-
 @media (min-width: 375px) and (max-width: 426px) {
     .modalContainer {
         width: 88%;

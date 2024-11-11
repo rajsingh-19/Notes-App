@@ -65,6 +65,12 @@ const MainPage = () => {
         //      set selectedGroupIndex and showNotes to display the correct notes
         setSelectedGroupIndex(index);
         setShowNotes(true);
+        // Check screen width and adjust the visibility of the sections
+        if (window.innerWidth <= 426 && window.innerWidth >= 315) {
+            setShowNotesContainer(false); // Hide the group list
+        } else {
+            setShowNotesContainer(true); // Show the group list for larger screens
+        }
     }
 
     //      function to update notes of a specific group
@@ -79,7 +85,7 @@ const MainPage = () => {
         if (!name) return ""; // Handle undefined or null name
         const words = name.trim().split(" ");
         if (words.length === 1) {
-            return words[0].charAt(0).toUpperCase();
+            return words[0].slice(0, 2).toUpperCase();
         }
         return words.slice(0, 2).map(word => word.charAt(0).toUpperCase()).join("");
     };
@@ -94,7 +100,7 @@ const MainPage = () => {
     <div className='mainpage-container flex dir-row'>
       {/*       Notes Making Section            */}
         {
-             showNotesContainer && (
+            showNotesContainer && (
             <div className='notes-name-section position-relative'>
                 <p className='text-center text-32 letter-spacing-2 font-wt-500 m-b-30'>Pocket Notes</p>
                 <ul className='groupNameListContainer'>
@@ -109,7 +115,7 @@ const MainPage = () => {
                     <img src={plusIcon} alt='plus-icon' className='plusIcon' />
                 </button>
             </div> 
-             )
+            )
         }
         {/*     Notes Section                   */}
         <div className={`notes-section ${showNotes ? 'visible' : ''}`}>
@@ -120,7 +126,7 @@ const MainPage = () => {
                     <img src={mainpageImg} alt="main page background-image" className='bgImg' />
                 </div>
                 <div className='flex dir-col align-center'>
-                        <p className='font-wt-700 text-40 letter-spacing-2'>Pocket Notes</p>
+                    <p className='font-wt-700 text-40 letter-spacing-2'>Pocket Notes</p>
                     <div className='notes-description'>
                         <p className='text-20 font-wt-500 letter-spacing-2'>Send and receive messages without keeping your phone online.</p>
                         <p className='text-20 font-wt-500 letter-spacing-2'>Use Pocket Notes on up to 4 linked devices and 1 mobile phone</p>
