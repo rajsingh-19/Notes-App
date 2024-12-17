@@ -91,7 +91,7 @@
 /*              responsiveness       */
 @media (max-width: 426px) and (min-width: 315px) {
     .notes-name-section {
-        width: 100vw;
+        width: 100%;
         display: block;
     }
     .plusIcon-container {
